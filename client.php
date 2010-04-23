@@ -10,10 +10,13 @@
  *  *******
  *  
  *  Features:
+ *  
  *  * Full support for GET, POST, auth
  *  * takes your API_KEY, API_SECRET and API_SK (an infinite session key) from env - so you can put it in .bashrc
  *  
+ *  
  *  Setup:
+ *  
  *  1. First, put your API_KEY and API_SECRET into the environment (you can find them at http://www.last.fm/api/account)
  *     $ export API_KEY=xxxxxxxxxxxx
  *     $ export API_SECRET=xxxxxxxxxx
@@ -26,6 +29,18 @@
  *     $ export API_SK=xxxxxxxxxxx
  *     This key should be infinite.
  *  6. Finally, put all 3 export lines into ~/.bashrc
+ *  
+ *  
+ *  *******
+ *  
+ *  Examples:
+ *  
+ *  Simple example: artist.getInfo (works without API_SK)
+ *    $ php ./client.php GET --method=artist.getInfo --artist=Radiohead
+ *    
+ *  Getting a radio playlist: (requires API_SK, and you be a subscriber)
+ *    $ php ./client.php POST --method=radio.tune --station=lastfm://user/last.hq/library
+ *    $ php ./client.php GET --method=radio.getPlaylist
  */
 
 ### This is a standalone version. It depends only on PEAR/HTTP/Request.php. All other dependent classes are INLINE. ###
