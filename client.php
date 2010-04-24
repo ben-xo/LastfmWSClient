@@ -45,7 +45,7 @@
 
 ### This is a standalone version. It depends only on PEAR/HTTP/Request.php. All other dependent classes are INLINE. ###
 
-error_reporting(0); // stupid deprecation warnings in HTTP_Request with PHP5.3
+error_reporting(E_ERROR | E_WARNING); // stupid deprecation warnings in HTTP_Request with PHP5.3
 require_once("HTTP/Request.php");
 
 class HTTPManager {
