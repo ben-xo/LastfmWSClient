@@ -4,11 +4,6 @@
 /**
  * Copyright (c) 2010 Last.fm. All Rights Reserved.
  * 
- * This client is NOT released in the public domain, and is only available for the single intended
- * use of testing Last.fm WS services during Music Hack Day in Amsterdam on April 24th and 25th 2010.
- * 
- *  *******
- *  
  *  Features:
  *  
  *  * Full support for GET, POST, auth
@@ -38,9 +33,8 @@
  *  Simple example: artist.getInfo (works without API_SK)
  *    $ php ./client.php GET --method=artist.getInfo --artist=Radiohead
  *    
- *  Getting a radio playlist: (requires API_SK, and you be a subscriber)
- *    $ php ./client.php POST --method=radio.tune --station=lastfm://user/last.hq/library
- *    $ php ./client.php GET --method=radio.getPlaylist
+ *  Logged in example: update your now playing track (requires API_SK)
+ *    $ php ./client.php POST --artist="Weather Report" --method=track.updateNowPlaying --track="Man In The Green Shirt" 
  */
 
 ### This is a standalone version. It depends only on PEAR/HTTP/Request.php. All other dependent classes are INLINE. ###
