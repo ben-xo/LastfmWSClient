@@ -5,7 +5,12 @@
    * Full support for GET, POST, auth
    * takes your API_KEY, API_SECRET and API_SK (session key) from env - so you can put it in .bashrc
    
+   Installation notes:
    
+   If you have proper PHP PEAR set up then you only need ./client.php. The other files are usually installed
+   by "pear install". But, they're here because it makes things easy.
+
+
    Setup:
    
    1. First, put your API_KEY and API_SECRET into the environment (you can find them at http://www.last.fm/api/account)
