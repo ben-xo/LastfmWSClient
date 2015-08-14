@@ -405,12 +405,29 @@ class WSSimpleClientRequest
         if($this->api_secret && !isset($this->params['api_sig']))
         {
             ksort($this->params);
+
+            // due to reasons, format and callback are not included in the api_sig calculation
+            if(isset($this->params['format']))
+            {
+                $format = $this->params['format'];
+                unset($this->params['format']);
+            }
+
+            if(isset($this->params['callback']))
+            {
+                $callback = $this->params['callback'];
+                unset($this->params['callback']);
+            }
+
             $sig_string = '';
             foreach($this->params as $key => $val)
             {
                 $sig_string .= $key . $val;
             }
             $this->params['api_sig'] = md5($sig_string . $this->api_secret);
+
+            if(isset($format))   $this->params['format']   = $format;
+            if(isset($callback)) $this->params['callback'] = $callback;
         }
     }
 
