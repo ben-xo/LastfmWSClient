@@ -40,6 +40,8 @@
 ### This is a standalone version. It depends only on PEAR/HTTP/Request.php. All other dependent classes are INLINE. ###
 
 error_reporting(E_ERROR | E_WARNING); // stupid deprecation warnings in HTTP_Request with PHP5.3
+set_include_path(dirname(realpath(__FILE__)) . PATH_SEPARATOR . get_include_path());
+#echo realpath(__FILE__); exit;
 require_once("HTTP/Request.php");
 
 class HTTPManager {
@@ -303,6 +305,10 @@ class WSSimpleClient extends ScriptWithHelp
                     echo $req->get();
                     break;
 
+                case 'POST+GET':
+                    echo $req->post_get();
+                    break;
+
                 case 'POST':
                     echo $req->post();
                     break;
@@ -361,9 +367,27 @@ class WSSimpleClientRequest
         $url = $this->api_root . '?' . http_build_query($this->params);
         $rq = $this->getHTTPRequest($url);
 
+        echo "request:\n\n" . $rq->_buildRequest() . "\n\n";
+
         $rc = $rq->sendRequest();
         if(PEAR::isError($rc))
             throw new Exception('GET failed: ' . $rc->getMessage() . "\nResponse:" . $rq->getResponseBody());
+
+        return $rq->getResponseBody();
+    }
+
+    public function post_get()
+    {
+        $this->prepare();
+        $url = $this->api_root . '?' . http_build_query($this->params);
+        $rq = $this->getHTTPRequest($url);
+        $rq->setMethod('POST');
+
+        echo "request:\n\n" . $rq->_buildRequest() . "\n\n";
+
+        $rc = $rq->sendRequest();
+        if(PEAR::isError($rc))
+            throw new Exception('POST+GET failed: ' . $rc->getMessage() . "\nResponse:" . $rq->getResponseBody());
 
         return $rq->getResponseBody();
     }
@@ -376,6 +400,8 @@ class WSSimpleClientRequest
         $rq->setMethod('POST');
         foreach($this->params as $key => $val)
             $rq->addPostData($key, $val);
+
+        echo "request:\n\n" . $rq->_buildRequest() . "\n\n";
 
         $rc = $rq->sendRequest();
         if(PEAR::isError($rc))
