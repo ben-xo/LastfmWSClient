@@ -6,6 +6,8 @@
    * takes your API_KEY, API_SECRET and API_SK (session key) from env - so you can put it in .bashrc
    
    Installation notes:
+
+   **Please note** this is not currently compatible with PHP 8. Use PHP 7.
    
    If you have proper PHP PEAR set up then you only need ./client.php. The other files are usually installed
    by "pear install". But, they're here because it makes things easy.
